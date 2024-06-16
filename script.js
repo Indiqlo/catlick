@@ -4,9 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const youveBeenCatlickedElement = document.getElementById('youve-been-catlicked');
     const memeElement = document.getElementById('meme');
     const cat = document.getElementById('cat');
-    const angry = document.getElementById('angry');
     const catSound = document.getElementById('catSound');
-    const angrySound = document.getElementById('angrySound');
     const copyableTextElement = document.getElementById('copyable-text');
     let catAnimationTimeout;
     let cursorEvent;
@@ -34,33 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         catSound.currentTime = 0; // Reset sound to the beginning
     };
 
-    const showAngry = () => {
-        console.log("Showing angry image and playing angry sound");
-        stopCatSound();
-        cat.style.display = 'none';
-        angry.style.display = 'block';
-        angrySound.volume = 1.0; // Ensure maximum volume
-        angrySound.play();
-
-        // Move the angry image to the initial cursor position
-        moveImage(cursorEvent, angry);
-
-        // Add mousemove event listener to follow the cursor
-        document.addEventListener('mousemove', moveAngry);
-        document.addEventListener('touchmove', moveAngry);
-    };
-
-    const hideAngry = () => {
-        console.log("Hiding angry image");
-        angry.style.display = 'none';
+    const showYouveBeenCatlicked = () => {
+        console.log("Showing 'you've been catlicked' text");
         catlickElement.style.display = 'none';
         youveBeenCatlickedElement.style.display = 'block';
 
         catlickedCount += 1;
-
-        // Remove mousemove event listener for the angry image
-        document.removeEventListener('mousemove', moveAngry);
-        document.removeEventListener('touchmove', moveAngry);
 
         // Show "you've been catlicked" for 3 seconds
         setTimeout(() => {
@@ -81,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const moveCat = (event) => moveImage(event, cat);
-    const moveAngry = (event) => moveImage(event, angry);
 
     const resetState = () => {
         clickElement.style.display = 'block';
@@ -117,27 +93,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Move the cat to the initial cursor position
         moveCat(event);
 
-        // Add mousemove event listener to follow the cursor
+        // Add mousemove and touchmove event listeners to follow the cursor
         document.addEventListener('mousemove', moveCat);
         document.addEventListener('touchmove', moveCat);
 
-        // Set timeout to hide cat image and show angry image after 5 seconds
+        // Set timeout to hide cat image and show "you've been catlicked" text after 5 seconds
         catAnimationTimeout = setTimeout(() => {
             cat.style.display = 'none';
             stopCatSound();
-            showAngry();
+            showYouveBeenCatlicked();
         }, 5000);
     };
 
-    catlickElement.addEventListener('mousedown', handleMouseDown);
-    catlickElement.addEventListener('touchstart', handleMouseDown);
-
     const handleMouseUp = () => {
         console.log("Mouse up");
-        // Hide the cat image if angry is not displayed
-        if (angry.style.display !== 'block') {
-            cat.style.display = 'none';
-        }
+        // Hide the cat image
+        cat.style.display = 'none';
 
         // Reset the cursor to default
         document.body.style.cursor = 'default';
@@ -145,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Stop the cat sound
         stopCatSound();
 
-        // Remove mousemove event listener for the cat image
+        // Remove mousemove and touchmove event listeners for the cat image
         document.removeEventListener('mousemove', moveCat);
         document.removeEventListener('touchmove', moveCat);
 
@@ -153,11 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(catAnimationTimeout);
     };
 
+    catlickElement.addEventListener('mousedown', handleMouseDown);
+    catlickElement.addEventListener('touchstart', handleMouseDown);
+
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('touchend', handleMouseUp);
-
-    // Hide the angry image when the angry sound ends
-    angrySound.addEventListener('ended', hideAngry);
 
     // Handle clicks on the background
     document.addEventListener('click', function(event) {
