@@ -16,12 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
     cat.style.display = 'none'; // Ensure the cat image is hidden initially
 
     const moveImage = (event, element) => {
+        const touch = event.touches ? event.touches[0] : event;
         const imageWidth = element.offsetWidth;
         const imageHeight = element.offsetHeight;
 
         // Position the image directly under the cursor, adjusted by 2px to the left and 5px down
-        const left = event.clientX - imageWidth / 2 - 2;
-        const top = event.clientY - imageHeight / 2 + 5;
+        const left = touch.clientX - imageWidth / 2 - 2;
+        const top = touch.clientY - imageHeight / 2 + 5;
 
         // Apply the calculated position
         element.style.left = `${left}px`;
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add mousemove event listener to follow the cursor
         document.addEventListener('mousemove', moveAngry);
+        document.addEventListener('touchmove', moveAngry);
     };
 
     const hideAngry = () => {
@@ -59,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Remove mousemove event listener for the angry image
         document.removeEventListener('mousemove', moveAngry);
+        document.removeEventListener('touchmove', moveAngry);
 
         // Show "you've been catlicked" for 3 seconds
         setTimeout(() => {
@@ -95,12 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
         catlickElement.style.display = 'block';
     });
 
-    catlickElement.addEventListener('mousedown', function(event) {
+    const handleMouseDown = (event) => {
         console.log('Mouse down on "catlick" element');
         event.stopPropagation(); // Stop the event from bubbling up
 
         // Store the cursor event for later use
-        cursorEvent = event;
+        cursorEvent = event.touches ? event.touches[0] : event;
 
         // Change the cursor to pointer
         document.body.style.cursor = 'pointer';
@@ -117,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add mousemove event listener to follow the cursor
         document.addEventListener('mousemove', moveCat);
+        document.addEventListener('touchmove', moveCat);
 
         // Set timeout to hide cat image and show angry image after 5 seconds
         catAnimationTimeout = setTimeout(() => {
@@ -124,7 +128,10 @@ document.addEventListener('DOMContentLoaded', function() {
             stopCatSound();
             showAngry();
         }, 5000);
-    });
+    };
+
+    catlickElement.addEventListener('mousedown', handleMouseDown);
+    catlickElement.addEventListener('touchstart', handleMouseDown);
 
     document.addEventListener('mouseup', function() {
         console.log("Mouse up");
@@ -140,6 +147,29 @@ document.addEventListener('DOMContentLoaded', function() {
         stopCatSound();
 
         // Remove mousemove event listener for the cat image
+        document.removeEventListener('mousemove', moveCat);
+        document.removeEventListener('touchmove', moveCat);
+
+        // Clear the mouse down timeout
+        clearTimeout(mouseDownTimeout);
+        clearTimeout(catAnimationTimeout);
+    });
+
+    document.addEventListener('touchend', function() {
+        console.log("Touch end");
+        // Hide the cat image if angry is not displayed
+        if (angry.style.display !== 'block') {
+            cat.style.display = 'none';
+        }
+
+        // Reset the cursor to default
+        document.body.style.cursor = 'default';
+
+        // Stop the cat sound
+        stopCatSound();
+
+        // Remove touchmove event listener for the cat image
+        document.removeEventListener('touchmove', moveCat);
         document.removeEventListener('mousemove', moveCat);
 
         // Clear the mouse down timeout
