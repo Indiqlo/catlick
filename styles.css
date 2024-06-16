@@ -18,19 +18,18 @@ body, html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    text-align: center;
 }
 
 #click, #catlick, #youve-been-catlicked, #meme {
     color: white;
     font-size: 3rem;
     cursor: pointer;
+    position: absolute;
     user-select: none; /* Prevent text selection */
     -webkit-user-select: none; /* For Safari */
     -moz-user-select: none; /* For Firefox */
     -ms-user-select: none; /* For IE */
     text-align: center;
-    padding: 0 1rem; /* Add some padding for smaller screens */
 }
 
 #meme {
@@ -57,22 +56,10 @@ body, html {
     animation: catAnimation 0.25s steps(5) infinite; /* Updated duration and steps */
 }
 
-#angry {
-    background-image: url('angry.png');
-    width: 200px; /* Adjusted size */
-    height: 200px; /* Adjusted size */
-    background-size: contain;
-    background-repeat: no-repeat; /* Ensure background does not repeat */
-    position: absolute;
-    display: none;
-}
-
 #social-icons {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    display: flex;
-    align-items: center;
 }
 
 #social-icons a {
@@ -119,11 +106,6 @@ body, html {
     #cat {
         width: 80px;  /* Smaller size for small screens */
         height: 80px; /* Smaller size for small screens */
-    }
-
-    #angry {
-        width: 160px; /* Smaller size for small screens */
-        height: 160px; /* Smaller size for small screens */
     }
 
     #copyable-text {
