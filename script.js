@@ -206,3 +206,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial state
     resetState();
 });
+ 
