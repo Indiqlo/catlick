@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const catSound = document.getElementById('catSound');
     const angrySound = document.getElementById('angrySound');
     const copyableTextElement = document.getElementById('copyable-text');
-    let mouseDownTimeout;
     let catAnimationTimeout;
     let cursorEvent;
     let catlickedCount = 0;
@@ -133,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     catlickElement.addEventListener('mousedown', handleMouseDown);
     catlickElement.addEventListener('touchstart', handleMouseDown);
 
-    document.addEventListener('mouseup', function() {
+    const handleMouseUp = () => {
         console.log("Mouse up");
         // Hide the cat image if angry is not displayed
         if (angry.style.display !== 'block') {
@@ -151,31 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.removeEventListener('touchmove', moveCat);
 
         // Clear the mouse down timeout
-        clearTimeout(mouseDownTimeout);
         clearTimeout(catAnimationTimeout);
-    });
+    };
 
-    document.addEventListener('touchend', function() {
-        console.log("Touch end");
-        // Hide the cat image if angry is not displayed
-        if (angry.style.display !== 'block') {
-            cat.style.display = 'none';
-        }
-
-        // Reset the cursor to default
-        document.body.style.cursor = 'default';
-
-        // Stop the cat sound
-        stopCatSound();
-
-        // Remove touchmove event listener for the cat image
-        document.removeEventListener('touchmove', moveCat);
-        document.removeEventListener('mousemove', moveCat);
-
-        // Clear the mouse down timeout
-        clearTimeout(mouseDownTimeout);
-        clearTimeout(catAnimationTimeout);
-    });
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchend', handleMouseUp);
 
     // Hide the angry image when the angry sound ends
     angrySound.addEventListener('ended', hideAngry);
@@ -206,4 +185,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial state
     resetState();
 });
- 
