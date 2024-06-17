@@ -60,12 +60,12 @@ body, html {
 
 #social-icons {
     position: absolute;
-    bottom: 60px;
-    left: 20px;
+    bottom: 60px; /* Position above the text line */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: calc(100% - 40px); /* Full width minus padding */
+    align-items: center;
 }
 
 #social-icons a {
@@ -120,14 +120,13 @@ body, html {
     }
 
     #copyable-text {
-        font-size: 20px; /* Smaller size for small screens */
+        font-size: 15px; /* Smaller size for small screens */
     }
 
     #social-icons {
         bottom: 80px; /* Adjust position for small screens */
-        left: 10px;   /* Adjust position for small screens */
-        width: calc(100% - 20px); /* Full width minus padding */
-        justify-content: space-around; /* Spread icons across the width */
+        width: 100%; /* Full width */
+        justify-content: center; /* Center the icons */
     }
 
     #twitter-icon, #telegram-icon {
