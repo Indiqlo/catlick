@@ -60,7 +60,7 @@ body, html {
 
 #social-icons {
     position: absolute;
-    bottom: 20px;
+    bottom: 60px;
     left: 20px;
     display: flex;
     align-items: center;
@@ -84,10 +84,13 @@ body, html {
     font-size: 30px; /* Updated size */
     cursor: pointer;
     margin-left: 10px; /* Space between icon and text */
+    margin-right: 10px; /* Add padding to the right */
     user-select: none;
     font-family: Arial, sans-serif; /* Changed to Arial */
     flex-grow: 1; /* Allow the text to grow and fill the available space */
     text-align: center; /* Center the text */
+    padding-left: 10px; /* Add padding to the left */
+    padding-right: 10px; /* Add padding to the right */
 }
 
 #copyable-text.copied::after {
@@ -121,9 +124,10 @@ body, html {
     }
 
     #social-icons {
-        bottom: 10px; /* Adjust position for small screens */
+        bottom: 80px; /* Adjust position for small screens */
         left: 10px;   /* Adjust position for small screens */
         width: calc(100% - 20px); /* Full width minus padding */
+        justify-content: space-around; /* Spread icons across the width */
     }
 
     #twitter-icon, #telegram-icon {
