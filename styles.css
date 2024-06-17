@@ -58,14 +58,19 @@ body, html {
     animation: catAnimation 0.25s steps(5) infinite; /* Updated duration and steps */
 }
 
-#social-icons {
+#social-container {
     position: absolute;
-    bottom: 60px; /* Position above the text line */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#social-icons {
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 10px;
 }
 
 #social-icons a {
@@ -83,11 +88,8 @@ body, html {
     color: white;
     font-size: 30px; /* Updated size */
     cursor: pointer;
-    margin-left: 10px; /* Space between icon and text */
-    margin-right: 10px; /* Add padding to the right */
     user-select: none;
     font-family: Arial, sans-serif; /* Changed to Arial */
-    flex-grow: 1; /* Allow the text to grow and fill the available space */
     text-align: center; /* Center the text */
     padding-left: 10px; /* Add padding to the left */
     padding-right: 10px; /* Add padding to the right */
@@ -121,12 +123,6 @@ body, html {
 
     #copyable-text {
         font-size: 15px; /* Smaller size for small screens */
-    }
-
-    #social-icons {
-        bottom: 80px; /* Adjust position for small screens */
-        width: 100%; /* Full width */
-        justify-content: center; /* Center the icons */
     }
 
     #twitter-icon, #telegram-icon {
