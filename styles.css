@@ -1,0 +1,125 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#click, #catlick, #youve-been-catlicked, #meme {
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    position: absolute;
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* For Safari */
+    -moz-user-select: none; /* For Firefox */
+    -ms-user-select: none; /* For IE */
+    text-align: center;
+}
+
+#meme {
+    background-color: black; /* Set the background color to black */
+    padding: 0.5rem; /* Add some padding around the text */
+}
+
+#click {
+    padding-left: 2.5rem; /* Adjusted to align 'lick' parts */
+}
+
+#youve-been-catlicked {
+    padding-right: 12.8rem; /* Adjust padding to align with 'catlick' */
+}
+
+#cat {
+    width: 100px;  /* Increased size */
+    height: 100px; /* Increased size */
+    background-size: contain;
+    background-repeat: no-repeat; /* Ensure background does not repeat */
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    animation: catAnimation 0.25s steps(5) infinite; /* Updated duration and steps */
+}
+
+#social-icons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+#social-icons a {
+    text-decoration: none; /* Remove underline */
+}
+
+#twitter-icon, #telegram-icon {
+    width: 25px; /* Adjusted size */
+    height: 25px; /* Adjusted size */
+    margin-right: 10px; /* Space between icons */
+    cursor: pointer;
+}
+
+#copyable-text {
+    color: white;
+    font-size: 30px; /* Updated size */
+    cursor: pointer;
+    margin-left: 10px; /* Space between icon and text */
+    user-select: none;
+    font-family: Arial, sans-serif; /* Changed to Arial */
+}
+
+#copyable-text.copied::after {
+    content: ' (copied)';
+    color: white;
+    font-size: 10px; /* Updated size */
+}
+
+@keyframes catAnimation {
+    0% { background-image: url('cat1.png'); }
+    20% { background-image: url('cat2.png'); }
+    40% { background-image: url('cat3.png'); }
+    60% { background-image: url('cat4.png'); }
+    80% { background-image: url('cat6.png'); }
+    100% { background-image: url('cat1.png'); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    #click, #catlick, #youve-been-catlicked, #meme {
+        font-size: 2rem; /* Smaller font size for small screens */
+    }
+
+    #cat {
+        width: 80px;  /* Smaller size for small screens */
+        height: 80px; /* Smaller size for small screens */
+    }
+
+    #copyable-text {
+        font-size: 20px; /* Smaller size for small screens */
+    }
+
+    #social-icons {
+        bottom: 10px; /* Adjust position for small screens */
+        left: 10px;   /* Adjust position for small screens */
+    }
+
+    #twitter-icon, #telegram-icon {
+        width: 20px;  /* Smaller size for small screens */
+        height: 20px; /* Smaller size for small screens */
+        margin-right: 5px; /* Adjust space between icons */
+    }
+}
